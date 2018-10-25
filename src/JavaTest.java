@@ -1,5 +1,6 @@
 import fr.rhaz.minecraft.Direction;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -14,21 +15,22 @@ public class JavaTest extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Listener() {
             @EventHandler
             public void onBlockBreak(BlockBreakEvent e){
-                test();
+                test(e.getPlayer());
             }
         }, this);
 
     }
 
-    public void test(){
-        gui(this, getServer().getPlayer("Test"), "Menu", 6, listener((gui) -> {
+    public void test(Player player){
+
+        gui(this, player, "Menu", 6, listener((gui) -> {
 
             gui.item(1,1, listener((item) -> {
                 item.setType(Material.ANVIL);
                 item.setName("&6My button");
                 item.getLore().add("&cThis is the lore");
                 item.setAmount(32);
-                item.setOnclick(listener((e, player) -> {
+                item.setOnclick(listener((e, player2) -> {
                     e.setCancelled(true);
                     player.sendMessage("§bYou clicked");
                     item.move(Direction.right);
@@ -40,7 +42,7 @@ public class JavaTest extends JavaPlugin {
             gui.item(9,6, listener((item) -> {
                 item.setType(Material.WOOD_DOOR);
                 item.setName("&cExit");
-                item.setOnclick(listener((e, player) -> {
+                item.setOnclick(listener((e, player2) -> {
                     player.closeInventory();
                 }));
             }));
