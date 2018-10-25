@@ -1,0 +1,5 @@
+name: @name@
+version: @version@
+main: fr.rhaz.minecraft.JavaTest
+author: Hazae41
+depend: [Kotlin4MC]
