@@ -74,6 +74,7 @@ class GUI(
             set(value) { slot = slot(x, value) }
 
         fun move(direction: Direction) = move(this.x, this.y, direction)
+        fun move(x: Int, y: Int) = move(this.x, this.y, x, y)
 
         var type = AIR
         var amount = 1
@@ -178,16 +179,19 @@ class GUI(
     }
 }
 
-fun wrap(text: String, max: Int = 32): MutableList<String>{
-    val words = text.split(" ")
-    val result = mutableListOf<String>()
-    var line = words[0]
-    for(word in words.subList(1, words.size-1)){
-        val pre = "$line $word"
-        if(pre.length > max){
-            result += line
-            line = word
-        } else line = pre
-    }
-    return result
-}
+@JvmOverloads
+fun wrap(text: String, max: Int = 32)
+    = text.split("\n").flatMap{
+        mutableListOf<String>().apply {
+            val words = it.split(" ")
+            var line = words[0]
+            for(word in words.drop(1)){
+                val pre = "$line $word"
+                if(pre.length > max){
+                    this += line
+                    line = word
+                } else line = pre
+            }
+            this += line
+        }
+    }.toMutableList()

@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly "fr.rhaz.minecraft:kotlin4mc:2.0.5"
+    compileOnly "fr.rhaz.minecraft:kotlin4mc:2.0.6"
     compileOnly "net.md-5:bungeecord-api:1.13-SNAPSHOT"
     compileOnly "org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT"
 }

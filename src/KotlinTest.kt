@@ -26,11 +26,10 @@ class UltimateGUI: BukkitPlugin(){
                     type = Material.ANVIL
                     name = "It works!"
                     isCancelled = true
-                    lateinit var task: BukkitTask
-                    task = schedule(async = true, period = 10){
+                    schedule(async = true, period = 10){
                         move(Direction.down)
                         refresh()
-                        if(y == 1) task.cancel()
+                        if(y == 1) cancel()
                     }
                 }
             }
@@ -47,19 +46,28 @@ class UltimateGUI: BukkitPlugin(){
             item(2,1){
                 type = Material.COMMAND_CHAIN
                 onclick = bricks
+                move(9, 6)
             }
         }
     }
+
+    val text = """
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Suspendisse fermentum accumsan sapien vitae ultrices.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+    """.trimIndent()
 
     var bricks = fun InventoryClickEvent.(player: Player){
         gui(player){
             background{
                 type = Material.BRICK
                 onclick = { isCancelled = true }
+                enchants[Enchantment.KNOCKBACK] = 3
             }
             item(5, 3){
                 type = Material.BED
                 onclick = {
+                    isCancelled = true
                     it.execute("sethome")
                 }
             }

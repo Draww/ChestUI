@@ -1,5 +1,5 @@
 name: @name@
 version: @version@
-main: fr.rhaz.minecraft.JavaTest
+main: fr.rhaz.minecraft.UltimateGUI
 author: Hazae41
 depend: [Kotlin4MC]
