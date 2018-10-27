@@ -22,7 +22,7 @@ class UltimateGUI: BukkitPlugin(){
                 amount = 3
                 name = "Test"
                 enchants[Enchantment.ARROW_FIRE] = 1
-                onclick = {
+                onclick = { player ->
                     type = Material.ANVIL
                     name = "It works!"
                     isCancelled = true
