@@ -1,6 +1,7 @@
 package fr.rhaz.minecraft
 
 import fr.rhaz.minecraft.kotlin.*
+import net.md_5.bungee.api.ChatColor
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
@@ -12,6 +13,7 @@ import org.bukkit.scheduler.BukkitTask
 class UltimateGUI: BukkitPlugin(){
 
     override fun onEnable() {
+        update(61895, ChatColor.AQUA)
         listen(callback = blockbreak)
     }
 

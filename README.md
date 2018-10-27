@@ -390,7 +390,7 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
     gui.item(1,1, listener((item) -> {
         item.setType(Material.CHEST);
         item.setName("§cClick me");
-        item.setOnclick(listener((e, player) -> {
+        item.setOnclick(listener((e, player2) -> {
             e.setCancelled(true);
             gui.setTitle("The new title");
             gui.regen();
