@@ -1,3 +1,5 @@
+package fr.rhaz.minecraft;
+
 import fr.rhaz.minecraft.Direction;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -46,6 +48,8 @@ public class JavaTest extends JavaPlugin {
                     player.closeInventory();
                 }));
             }));
+
+            gui.info("On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même.");
         }));
     }
 }

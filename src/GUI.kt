@@ -4,12 +4,17 @@ import fr.rhaz.minecraft.Direction.*
 import fr.rhaz.minecraft.kotlin.BukkitPlugin
 import fr.rhaz.minecraft.kotlin.listen
 import org.bukkit.Material
+import org.bukkit.Material.*
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
+import org.bukkit.event.Cancellable
 import org.bukkit.event.EventPriority
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import kotlin.collections.set
+import kotlin.reflect.KProperty
+
 
 enum class Direction{ up, down, left, right }
 
@@ -23,11 +28,15 @@ fun BukkitPlugin.gui(
 
 class GUI(
     val plugin: BukkitPlugin,
-    val name: String,
-    val rows: Int
+    var title: String,
+    var rows: Int
 ){
 
-    val inventory = plugin.server.createInventory(null, rows * 9, name.replace("&", "§"))
+    init{ regen() }
+    lateinit var inventory: Inventory private set
+    fun regen(){
+        inventory = plugin.server.createInventory(null, rows * 9, title.replace("&", "§"))
+    }
 
     fun refresh() = inventory.apply {
         clear()
@@ -43,7 +52,10 @@ class GUI(
         }
     }
 
-    fun open(player: Player) { player.openInventory(inventory) }
+    fun open(player: Player) {
+        refresh()
+        player.openInventory(inventory)
+    }
 
     val items = mutableMapOf<Int, Item>()
 
@@ -63,7 +75,7 @@ class GUI(
 
         fun move(direction: Direction) = move(this.x, this.y, direction)
 
-        var type = Material.AIR
+        var type = AIR
         var amount = 1
         var name: String? = null
         val lore = mutableListOf<String>()
@@ -97,9 +109,7 @@ class GUI(
             item(x, y, builder)
     }
 
-    fun background(
-        builder: GUI.Item.() -> Unit
-    ) = fill(1,1,9,rows,builder)
+    fun background(builder: GUI.Item.() -> Unit) = fill(1,1, 9,rows, builder)
 
     fun move(x1: Int, y1: Int, x2: Int, y2: Int){
         items[slot(x2, y2)] = items.remove(slot(x1, y1)) ?: return
@@ -112,4 +122,72 @@ class GUI(
             left -> move(x, y, if(x == 1) 9 else x-1, y)
             right -> move(x, y, if(x == 9) 1 else x+1, y)
         }
+
+    @JvmOverloads
+    fun exit(builder: Item.() -> Unit = {}) = item(9, 1){
+        type = WOODEN_DOOR
+        name = "&cExit"
+        onclick = {it.closeInventory()}
+    }.apply(builder)
+
+    @JvmOverloads
+    fun back(gui: GUI, builder: Item.() -> Unit = {}) = item(8, 1){
+        type = ARROW
+        name = "&cBack"
+        onclick = {
+            isCancelled = true
+            gui.open(it)
+        }
+    }
+
+    @JvmOverloads
+    fun yes(action: (Player) -> Unit, builder: Item.() -> Unit = {}){
+        fill(2,3, 3,4){
+            type = CONCRETE
+            onclick = {
+                isCancelled = true
+                action(it)
+            }
+            apply(builder)
+        }
+    }
+
+    @JvmOverloads
+    fun no(action: (Player) -> Unit, builder: Item.() -> Unit = {}){
+        fill(7,3, 8,4){
+            type = CONCRETE
+            onclick = {
+                isCancelled = true
+                action(it)
+            }
+            apply(builder)
+        }
+    }
+
+    val cancelled: InventoryClickEvent.(Player) -> Unit = {isCancelled = true}
+
+    @JvmOverloads
+    fun info(text: String, builder: Item.() -> Unit = {}){
+        item(5,2){
+            type = SIGN
+            onclick = cancelled
+            name = "&bInfo"
+            lore += wrap(text)
+            apply(builder)
+        }
+    }
+}
+
+fun wrap(text: String, max: Int = 32): MutableList<String>{
+    val words = text.split(" ")
+    val result = mutableListOf<String>()
+    var line = words[0]
+    for(word in words.subList(1, words.size-1)){
+        val pre = "$line $word"
+        if(pre.length > max){
+            result += line
+            line = word
+        } else line = pre
+    }
+    return result
 }
