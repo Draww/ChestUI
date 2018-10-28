@@ -22,7 +22,7 @@ gui(player, "Menu", 6){
         // When this item is clicked, do the following
         onclick = { player ->
             // Prevent taking the item
-            isCancelled(true)
+            isCancelled = true
             // Send a message with the location of the item
             player.msg("&bYou clicked the item $name &bat $x $y!")
         }
@@ -59,7 +59,7 @@ gui(player, "Menu", 6){
         name = "&cClick me"
         onclick = { player ->
             // Prevent taking the item
-            isCancelled(true)
+            isCancelled = true
             // Modify the item
             type = Material.DIAMOND
             name = "&bI am a diamond"
@@ -97,7 +97,7 @@ gui(player, "Menu", 6){
         type = Material.CHEST
         name = "&cClick me"
         onclick = { player ->
-            isCancelled(true)
+            isCancelled = true
             // Move the item to the right
             move(Direction.right)
             // Refresh the GUI
@@ -133,7 +133,7 @@ gui(player, "Menu", 6){
         type = Material.CHEST
         name = "&cClick me"
         onclick = { player ->
-            isCancelled(true)
+            isCancelled = true
             // Move the item to the bottom-right of the GUI
             move(9,6)
             // Refresh the GUI
@@ -169,7 +169,7 @@ gui(player, "Menu", 6){
         type = Material.CHEST
         name = "&cClick me"
         onclick = { player ->
-            isCancelled(true)
+            isCancelled = true
             // Each 1 second, the item will move to the right until the right edge
             schedule(period = 1, unit = TimeUnit.SECONDS){
                 // Move the item to the right
@@ -215,7 +215,7 @@ gui(player, "Menu", 6){
         name = "&cI am part of the background"
         onclick = { player ->
             // Prevent taking the item
-            isCancelled(true)
+            isCancelled = true
         }
     }
     
@@ -371,7 +371,7 @@ gui(player, "Menu", 6){
         type = Material.CHEST
         name = "&cClick me"
         onclick = { player ->
-            isCancelled(true)
+            isCancelled = true
             // Change the title
             title = "The new title"
             // Reopen the GUI

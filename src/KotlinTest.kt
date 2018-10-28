@@ -14,7 +14,7 @@ class UltimateGUI: BukkitPlugin(){
 
     override fun onEnable() {
         update(61895, ChatColor.AQUA)
-        listen(callback = blockbreak)
+        //listen(callback = blockbreak)
     }
 
     var blockbreak = fun(e: BlockBreakEvent) {
