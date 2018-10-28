@@ -1,5 +1,5 @@
 <h3 align=center>
-    <img src="https://i.imgur.com/2sbdoFJ.png"/>
+    <img src="https://i.imgur.com/3Sk1buV.png"/>
 </h3>
 
 :red_circle: This is currently is development!
