@@ -36,8 +36,8 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.item(3,2, listener((item) -> {
         item.setType(Material.ANVIL);
-        item.setName("§6My button");
-        item.getLore().add("§cThis is the lore");
+        item.setName("&6My button");
+        item.getLore().add("&cThis is the lore");
         item.setAmount(32);
         // When the item is clicked, call this listener
         item.setOnclick(listener((e, player2) -> {
@@ -76,11 +76,11 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.item(1,1, listener((item) -> {
         item.setType(Material.CHEST);
-        item.setName("§cClick me");
+        item.setName("&cClick me");
         item.setOnclick(listener((e, player2) -> {
             e.setCancelled(true);
             item.setType(Material.DIAMOND);
-            item.setName("§bI am a diamond")
+            item.setName("&bI am a diamond")
             gui.refresh();
         }));
     }));
@@ -113,7 +113,7 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.item(1,1, listener((item) -> {
         item.setType(Material.CHEST);
-        item.setName("§cClick me");
+        item.setName("&cClick me");
         item.setOnclick(listener((e, player2) -> {
             e.setCancelled(true);
             item.move(Direction.right);
@@ -149,7 +149,7 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.item(1,1, listener((item) -> {
         item.setType(Material.CHEST);
-        item.setName("§cClick me");
+        item.setName("&cClick me");
         item.setOnclick(listener((e, player2) -> {
             e.setCancelled(true);
             item.move(9, 6);
@@ -190,7 +190,7 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.item(1,1, listener((item) -> {
         item.setType(Material.CHEST);
-        item.setName("§cClick me");
+        item.setName("&cClick me");
         item.setOnclick(listener((e, player2) -> {
             e.setCancelled(true);
             schedule(this, false, null, 1L, TimeUnit.SECONDS, listener((task) -> {
@@ -230,7 +230,7 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.background(listener((item) -> {
         item.setType(Material.BRICKS);
-        item.setName("§cI am part of the background");
+        item.setName("&cI am part of the background");
         item.setOnclick(listener((e, player2) -> {
             e.setCancelled(true);
         }));
@@ -261,7 +261,7 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.fill(1,1, 2,2, listener((item) -> {
         item.setType(Material.DIAMOND);
-        item.setName("§bTake me!");
+        item.setName("&bTake me!");
     }));
 
 }));
@@ -288,7 +288,7 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.item(1,1, listener((item) -> {
         item.setType(Material.DIAMOND);
-        item.getLore().add("§6Here is a diamond for you!");
+        item.getLore().add("&6Here is a diamond for you!");
     }));
 
 }));
@@ -354,7 +354,7 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.item(1,1, listener((item) -> {
         item.setType(Material.IRON_SWORD);
-        item.setName("§bThe Excalibur");
+        item.setName("&bThe Excalibur");
         item.getEnchants().put(Enchantment.KNOCKBACK, 3);
     }));
 
@@ -389,7 +389,7 @@ gui(plugin, player, "Menu", 6, listener((gui) -> {
 
     gui.item(1,1, listener((item) -> {
         item.setType(Material.CHEST);
-        item.setName("§cClick me");
+        item.setName("&cClick me");
         item.setOnclick(listener((e, player2) -> {
             e.setCancelled(true);
             gui.setTitle("The new title");
